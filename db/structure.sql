@@ -243,7 +243,8 @@ ALTER SEQUENCE public.standup_items_id_seq OWNED BY public.standup_items.id;
 
 CREATE TABLE public.users (
     id bigint NOT NULL,
-    email character varying NOT NULL
+    email character varying NOT NULL,
+    settings jsonb DEFAULT '{}'::jsonb
 );
 
 
@@ -464,6 +465,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190415200626'),
 ('20190415202626'),
 ('20191230155235'),
-('20191230155245');
+('20191230155245'),
+('20200307160842');
 
 
