@@ -1,0 +1,19 @@
+<% content_for :title, env_title("Settings") %>
+
+<% content_for :header do %>
+  Settings
+<% end %>
+
+<div class="p-5">
+<%= form_tag settings_path do %>
+  <% @settings.each_pair do |name, value| %>
+    <div class="form-group row">
+      <%= label_tag(name, nil, class: "col-sm-2 col-form-label") %>
+      <div class="col-sm-10">
+        <%= text_field_tag('value', value, name: "settings[][#{name}]", class: "form-control", autofocus: true) %>
+      </div>
+    </div>
+  <% end %>
+  <%= button_tag "Save", name: 'save', class: "btn btn-primary btn-sm" %>
+<% end %>
+</div>

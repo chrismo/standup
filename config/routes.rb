@@ -22,4 +22,7 @@ Rails.application.routes.draw do
   end
 
   resources "api_keys", only: %i[index create destroy]
+
+  get "settings", to: "settings#index"
+  post "settings", to: "settings#update"
 end

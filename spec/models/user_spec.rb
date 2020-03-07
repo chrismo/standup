@@ -10,8 +10,7 @@ RSpec.describe User, type: :model do
 
   it "stores name preference" do
     u = User.create(email: "foo@mysteryscience.com")
-    u.settings = {name: "bar"}
-    u.save!
+    u.settings = {"name" => "bar"}
     expect(u.name).to eq "bar"
   end
 end
