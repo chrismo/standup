@@ -1,0 +1,13 @@
+<tr>
+  <%= hidden_field_tag 'id', row_item.id, name: 'items[][id]' %>
+  <%= hidden_field_tag 'id', row_item.developer, name: 'items[][old_developer]' %>
+  <%= hidden_field_tag 'id', row_item.day, name: 'items[][old_day]' %>
+  <%= hidden_field_tag 'id', row_item.task, name: 'items[][old_task]' %>
+  <%= hidden_field_tag 'id', row_item.category, name: 'items[][old_category]' %>
+  <td><%= text_field_tag('developer', row_item.developer || @standup_view.developer, name: 'items[][developer]', class: "form-control" ) %></td>
+  <td><%= text_field_tag('day', row_item.day&.strftime('%a, %b %d %Y') || prior_workday.strftime('%a'), name: 'items[][day]', class: "form-control" ) %></td>
+  <td><%= text_field_tag('task', row_item.task, name: 'items[][task]', size: 50, class: "form-control", autofocus: autofocus_this_row, onfocus: 'this.select();' ) %></td>
+  <td><%= select_tag('category', options_from_collection_for_select(@standup_view.categories, 'category', 'category', row_item.category), name: 'items[][category]', class: "form-control" ) %></td>
+  <td class="text-center align-middle"><%= button_tag "Save", name: 'save', class: "btn btn-primary btn-sm" %></td>
+  <td class="text-center align-middle"><%= button_tag "Delete", name: 'delete', value: row_item.id, class: "btn btn-primary btn-sm" %></td>
+</tr>

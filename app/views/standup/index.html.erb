@@ -1,0 +1,39 @@
+<% content_for :title, env_title("Standup") %>
+
+<% content_for :header do %>
+  Standup
+<% end %>
+
+
+<div class="item">
+  <%= render partial: "week_summary", locals: {week_summaries: @standup_view.week_summary, link_action: 'week_detail'} %>
+  <% if @standup_view.developer.present? %>
+    <%= render partial: "current_standup" %>
+  <% end %>
+</div>
+<div class="table-responsive-sm">
+  <div class="form-group">
+    <%= form_tag standup_path(dev: @standup_view.developer, date: @standup_view.date) do %>
+      <table class="table table-striped table-bordered table-hover text-nowrap table-sm">
+        <thead>
+        <tr>
+          <th scope="col">Developer</th>
+          <th scope="col">Day <i>(y, t, day of week, date)</i></th>
+          <th scope="col">Task <i>([Category] Task)</i></th>
+          <th scope="col">Category</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% new_standup_row_count.times.each do %>
+          <%= render partial: "standup_entry", locals: {row_item: StandupItem.new(developer: params[:dev]), autofocus_this_row: true} %>
+        <% end %>
+        <% @standup_view.items.each do |item| %>
+          <%= render partial: "standup_entry", locals: {row_item: item, autofocus_this_row: false} %>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

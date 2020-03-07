@@ -1,0 +1,4 @@
+Tale::Application.config.session_store :cookie_store, {
+  key: '_tale_session',
+  expire_after: 365.days
+}

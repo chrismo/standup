@@ -1,0 +1,44 @@
+<% content_for :title, env_title("Standup: Weekly Detail") %>
+
+<% content_for :header do %>
+  Standup: Weekly Detail
+<% end %>
+
+<style>
+  /* https://stackoverflow.com/a/47907208/479766 */
+  tbody:nth-child(odd) {
+    background: #EEE;
+  }
+
+  thead {
+    background: #eee;
+  }
+</style>
+
+<div class="item">
+  <%= render partial: "week_summary", locals: {week_summaries: @week_summary, link_action: '', paging_action: :week_detail} %>
+</div>
+<div class="table-responsive-sm">
+  <table class="table table-bordered text-nowrap table-sm">
+    <thead>
+    <tr>
+      <th scope="col">Dev</th>
+      <th scope="col">Categories</th>
+      <th scope="col">Tasks</th>
+    </tr>
+    </thead>
+    <% @week_detail.each do |dev, dev_cats| %>
+      <tbody>
+      <tr>
+        <td rowspan="<%= dev_cats.length %>">
+          <%= link_to dev, week_detail_path(dev: dev, date: @date) %>
+        </td>
+        <% dev_cats.each do |cat, cat_tasks| %>
+          <td><%= cat %></td>
+          <td><%= cat_tasks.join("<br/>").html_safe %></td>
+          </tr>
+        <% end %>
+        </tbody>
+    <% end %>
+  </table>
+</div>

@@ -1,0 +1,6 @@
+<% content_for :title, env_title("Standup: Planning") %>
+
+<%= render partial: 'week_summary', locals: {week_summaries: @week_summaries,
+                                               link_action: 'week_detail',
+                                               weeks_increment: @number_of_weeks,
+                                               paging_action: :week_summaries} %>

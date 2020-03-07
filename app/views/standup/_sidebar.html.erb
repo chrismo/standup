@@ -1,0 +1,4 @@
+<%= render partial: 'layouts/link_icon', locals: {target_link: standup_path, icon_name: 'home'} %>
+<%= render partial: 'layouts/link_icon', locals: {target_link: week_detail_path(date: @date), icon_name: 'calendar-week'} %>
+<%= render partial: 'layouts/link_icon', locals: {target_link: week_summary_path, icon_name: 'calendar-alt'} %>
+<%= render partial: 'layouts/link_icon', locals: {target_link: planning_path, icon_name: 'binoculars'} %>

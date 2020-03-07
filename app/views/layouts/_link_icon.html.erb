@@ -1,0 +1,21 @@
+<style>
+  .disabled-button {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+</style>
+
+<% disabled = local_assigns.fetch :disabled, nil %>
+
+<div class="mx-auto pt-4">
+    <span style="font-size: 3em;">
+      <% if disabled %>
+        <i class="fas fa-<%= icon_name %> disabled-button"></i>
+      <% else %>
+        <a href="<%= target_link %>">
+          <i class="fas fa-<%= icon_name %>"></i>
+        </a>
+      <% end %>
+    </span>
+</div>

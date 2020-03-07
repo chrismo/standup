@@ -1,0 +1,18 @@
+<% if daily_standup.present? %>
+  <% days = daily_standup.keys %>
+  <div class="daily-standup mb-4">
+    <div class="d-flex">
+      <% daily_standup.each do |day, day_items| -%>
+        <div class="text-center border p-2">
+          <% strong_class = day_items.empty? ? 'text-danger' : '' -%>
+          <strong class="<%= strong_class %>">*<%= day.strftime('%A - %b %d') %>*</strong>
+          <div class="text-left pl-0">
+            <% day_items.each do |item| -%>
+              <div class="list-group-item py-0 border-0 "><span class="text-nowrap">- <strong><%= item.category %></strong>:</span> <%= item.task %></div>
+            <% end -%>
+          </div>
+        </div>
+      <% end -%>
+    </div>
+  </div>
+<% end %>

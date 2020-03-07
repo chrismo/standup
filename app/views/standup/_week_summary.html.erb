@@ -1,0 +1,44 @@
+<%
+  developers = week_summaries.developers
+  weeks_increment ||= 1
+  paging_action ||= :index
+%>
+<div class="week-summary">
+  <table class="table table-bordered">
+    <thead class="thead-light">
+    <tr>
+      <th class="text-center text-nowrap" scope="col">
+        <%= link_to action: paging_action, dev: @dev, date: @date - (7 * weeks_increment) do %>
+          <span aria-hidden="true">&laquo;</span>
+        <% end %>
+        Week
+        <%= link_to action: paging_action, dev: @dev, date: @date + (7 * weeks_increment) do %>
+          <span aria-hidden="true">&raquo;</span>
+        <% end if (@date + 7 <= Date.current) %>
+      </th>
+      <% developers.each do |dev| %>
+        <th class="text-center" scope="col"><%= link_to dev, standup_path(dev: dev, date: @date) %></th>
+      <% end %>
+    </tr>
+    </thead>
+    <tbody>
+    <% week_summaries.weeks.each do |week_summary| %>
+      <tr>
+        <td class="text-center text-nowrap">
+          <%= link_to week_summary.date.strftime('%b %-d'), "/standup/#{link_action}?date=#{week_summary.date}" %>
+        </td>
+        <% developers.each do |dev| %>
+          <td class="text-center">
+            <%# https://getbootstrap.com/docs/4.3/utilities/stretched-link/#identifying-the-containing-block %>
+            <%# Followed the example here with transform: rotate(0) to get the stretched-link to work %>
+            <p style="transform: rotate(0);">
+              <%= week_summary.developers[dev]&.join(' / ') %>
+              <%= link_to '', standup_path(dev: dev, date: week_summary.date), class: 'stretched-link' %>
+            </p>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

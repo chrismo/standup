@@ -1,0 +1,58 @@
+<style>
+  .api-keys-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+  }
+
+  .api-keys-title {
+    position: relative;
+  }
+
+  .api-keys-menu {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-size: 16px;
+  }
+
+  .alert {
+    border: 1px solid #abc;
+    background-color: #efefef;
+    padding: 10px;
+    margin: 10px 0px;
+  }
+
+  .api-key {
+    margin: 10px 0px 20px;
+    padding: 5px 0px;
+    border-bottom: 1px solid #ccc;
+  }
+</style>
+
+<div class="api-keys-container">
+  <h3 class="api-keys-title">
+    API Keys
+
+    <div class="api-keys-menu">
+      <%= link_to 'create', api_keys_path, method: 'post' %>
+    </div>
+  </h3>
+
+  <% if flash[:alert].present? %>
+    <div class="alert"><%= flash[:alert] %></div>
+  <% end %>
+
+  <% if api_keys.empty? %>
+    <p>No api keys have been issued.</p>
+  <% end %>
+
+  <% api_keys.each do |api_key| %>
+    <div class="api-key">
+        <%= api_key.issuer.email %> issued a key on <%= api_key.issued_at %>
+        <br />
+        <%= link_to 'revoke', api_key_path(api_key), method: 'delete',
+              data: { confirm: 'Are you sure?' } %>
+    </div>
+  <% end %>
+</div>
