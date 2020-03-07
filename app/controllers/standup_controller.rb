@@ -9,8 +9,6 @@ class StandupController < ApplicationController
   before_action :filter_by_dev
 
   def index
-    redirect_to action: :week_summaries if standup_params.empty?
-
     @standup_view = StandupView.new(date: @date, developer: @dev)
   end
 
@@ -51,7 +49,7 @@ class StandupController < ApplicationController
   private
 
   def filter_by_dev
-    @dev = standup_params[:dev]
+    @dev = standup_params[:dev] || current_user.name
   end
 
   def filter_by_date
