@@ -7,6 +7,7 @@ class StandupController < ApplicationController
 
   before_action :filter_by_date
   before_action :filter_by_dev
+  before_action :default_to_current_dev, only: %i[index]
 
   def index
     @standup_view = StandupView.new(date: @date, developer: @dev)
@@ -49,7 +50,11 @@ class StandupController < ApplicationController
   private
 
   def filter_by_dev
-    @dev = standup_params[:dev] || current_user.name
+    @dev = standup_params[:dev]
+  end
+
+  def default_to_current_dev
+    @dev ||= current_user.name
   end
 
   def filter_by_date
