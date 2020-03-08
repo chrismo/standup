@@ -5,6 +5,7 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
+SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
@@ -21,7 +22,7 @@ CREATE TYPE public.pr_size AS ENUM (
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
 -- Name: api_keys; Type: TABLE; Schema: public; Owner: -
@@ -244,7 +245,7 @@ ALTER SEQUENCE public.standup_items_id_seq OWNED BY public.standup_items.id;
 CREATE TABLE public.users (
     id bigint NOT NULL,
     email character varying NOT NULL,
-    settings jsonb DEFAULT '{}'::jsonb
+    settings jsonb DEFAULT '{}'::jsonb NOT NULL
 );
 
 
